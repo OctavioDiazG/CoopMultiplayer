@@ -13,3 +13,17 @@ ACoopMultiplayerGameMode::ACoopMultiplayerGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+void ACoopMultiplayerGameMode::HostLANGame()
+{
+	GetWorld()->ServerTravel("Game/ThirdPerson/Maps/ThirdPersonMap?listen");
+}
+
+void ACoopMultiplayerGameMode::JoinLANGame()
+{
+	APlayerController *PC = GetGameInstance()->GetFirstLocalPlayerController();
+	if (PC)
+	{
+		PC->ClientTravel("192.168.100.82" /*IP Address of the host*/, ETravelType::TRAVEL_Absolute);
+	}
+}
