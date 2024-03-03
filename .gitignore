@@ -95,6 +95,17 @@ Plugins/FMODStudio*/Resources/*
 Plugins/FMODStudio*/Binaries/**/*.pdb
 Plugins/FMODStudio*/Binaries/Win64/UnrealEditor-*.dll
 
+# Advanced Sessions Plugin
+Plugins/AdvancedSessions*/.hg/
+Plugins/AdvancedSessions*/binaries/
+Plugins/AdvancedSessions*/deriveddatacache/
+Plugins/AdvancedSessions*/.vs/
+Plugins/AdvancedSessions*/build/
+Plugins/AdvancedSessions*/intermediate/
+Plugins/AdvancedSessions*/PACKPLUGIN/
+Plugins/AdvancedSessions*/saved/
+Plugins/AdvancedSessions*/**/*.orig
+
 # RiderLink Plugin
 Plugins/*/RiderLink/*
 
