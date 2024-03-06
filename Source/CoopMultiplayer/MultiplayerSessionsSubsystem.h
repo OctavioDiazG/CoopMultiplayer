@@ -23,4 +23,11 @@ public:
 	void Deinitialize() override;
 
 	IOnlineSessionPtr SessionInterface;
+
+	UFUNCTION(BlueprintCallable)
+	void CreateServer(FString ServerName /* bool bIsLAN, int32 MaxNumPlayers */);
+	
+	UFUNCTION(BlueprintCallable)
+	void FindServers(FString ServerName);
+	
 };

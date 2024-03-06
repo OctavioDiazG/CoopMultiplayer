@@ -42,3 +42,13 @@ void UMultiplayerSessionsSubsystem::Deinitialize()
 	
 }
 
+void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
+{
+	PrintString("Create Server");
+}
+
+void UMultiplayerSessionsSubsystem::FindServers(FString ServerName)
+{
+	PrintString("Find Servers");
+}
+
