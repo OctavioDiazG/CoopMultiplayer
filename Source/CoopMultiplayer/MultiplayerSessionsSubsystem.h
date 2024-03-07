@@ -29,5 +29,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void FindServers(FString ServerName);
+
+	void OnCreateSessionComplete(FName SessionName, bool WasSuccessful);
 	
 };

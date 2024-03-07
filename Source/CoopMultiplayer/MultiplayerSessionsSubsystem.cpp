@@ -32,7 +32,7 @@ void UMultiplayerSessionsSubsystem::Initialize(FSubsystemCollectionBase& Collect
 		SessionInterface = OnlineSubsystem->GetSessionInterface();
 		if (SessionInterface.IsValid())
 		{
-			PrintString("Session Interface Valid!");
+			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UMultiplayerSessionsSubsystem::OnCreateSessionComplete );
 		}
 	}
 }
@@ -76,5 +76,17 @@ void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
 void UMultiplayerSessionsSubsystem::FindServers(FString ServerName)
 {
 	PrintString("Find Servers");
+}
+
+void UMultiplayerSessionsSubsystem::OnCreateSessionComplete(FName SessionName, bool WasSuccessful)
+{
+	if (WasSuccessful)
+	{
+		GetWorld()->ServerTravel("/Game/ThirdPerson/Maps/ThirdPersonMap?listen");
+	}
+	else
+	{
+		PrintString("Session Creation Failed");
+	}
 }
 
