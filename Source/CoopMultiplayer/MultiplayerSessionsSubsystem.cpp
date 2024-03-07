@@ -52,6 +52,14 @@ void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
 		return;
 	}
 	FName MySessionName = FName("Coop Adventure Session Name");
+
+	FNamedOnlineSession *ExistingSessions = SessionInterface->GetNamedSession(MySessionName);
+	if (ExistingSessions)
+	{
+		PrintString(" Destroying Session ");
+		SessionInterface->DestroySession(MySessionName);
+		return;
+	}
 	
 	FOnlineSessionSettings SessionSettings;
 	SessionSettings.bAllowJoinInProgress = true; // Allow players to join a game in progress
