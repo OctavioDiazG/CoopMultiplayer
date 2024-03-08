@@ -17,6 +17,9 @@ void PrintString(const FString& String)
 UMultiplayerSessionsSubsystem::UMultiplayerSessionsSubsystem()
 {
 	//PrintString("MSS Constructor Called!");
+
+	CreateServerAfterDestroy = false;
+	DestroyServerName = "";
 }
 
 void UMultiplayerSessionsSubsystem::Initialize(FSubsystemCollectionBase& Collection)
@@ -33,6 +36,7 @@ void UMultiplayerSessionsSubsystem::Initialize(FSubsystemCollectionBase& Collect
 		if (SessionInterface.IsValid())
 		{
 			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this, &UMultiplayerSessionsSubsystem::OnCreateSessionComplete );
+			SessionInterface->OnDestroySessionCompleteDelegates.AddUObject(this, &UMultiplayerSessionsSubsystem::OnDestroySessionComplete);
 		}
 	}
 }
@@ -57,6 +61,8 @@ void UMultiplayerSessionsSubsystem::CreateServer(FString ServerName)
 	if (ExistingSessions)
 	{
 		PrintString(" Destroying Session ");
+		CreateServerAfterDestroy = true;
+		DestroyServerName = ServerName;
 		SessionInterface->DestroySession(MySessionName);
 		return;
 	}
@@ -95,6 +101,17 @@ void UMultiplayerSessionsSubsystem::OnCreateSessionComplete(FName SessionName, b
 	else
 	{
 		PrintString("Session Creation Failed");
+	}
+}
+
+void UMultiplayerSessionsSubsystem::OnDestroySessionComplete(FName SessionName, bool WasSuccessful)
+{
+	PrintString("On Destroy Session Complete");
+
+	if (CreateServerAfterDestroy)
+	{
+		CreateServerAfterDestroy = false;
+		CreateServer(DestroyServerName);
 	}
 }
 
