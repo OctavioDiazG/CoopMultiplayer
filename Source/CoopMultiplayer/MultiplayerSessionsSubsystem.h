@@ -41,6 +41,8 @@ public:
 
 	FString DestroyServerName;
 
+	FString ServerNameToFind;
+
 	TSharedPtr<FOnlineSessionSearch> SessionSearch;
 
 	
